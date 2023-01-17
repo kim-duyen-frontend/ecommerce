@@ -1,7 +1,11 @@
-import { Title } from '@mantine/core';
+
+import { wrapper } from '@/app/store';
+import ListProduct from '@/components/ListProduct/ListProduct';
+import { getListProduct } from '@/features';
+import { NextPage } from 'next';
 import Head from 'next/head'
 
-export default function Home() {
+const Home: NextPage = () => {
   return (
     <>
       <Head>
@@ -10,9 +14,13 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <Title order={1}>This is h1 title</Title>
-      </main>
+      <>
+        <ListProduct />
+      </>
     </>
   )
 }
+Home.getInitialProps = wrapper.getInitialPageProps(({ dispatch }) => async () => {
+  await dispatch(getListProduct())
+})
+export default Home
