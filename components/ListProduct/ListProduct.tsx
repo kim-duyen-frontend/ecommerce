@@ -1,32 +1,62 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAppSelector } from 'app/hooks'
 import { selectCollectionEcommerceSelector } from '@/features';
-import { Card, Button, Grid, Text, Center } from '@mantine/core';
+import { Card, Button, Grid, Badge, Center, Group, Transition } from '@mantine/core';
+import { IconHeart } from "@tabler/icons"
 import Image from 'next/image'
 
 const ListProduct = () => {
     const { products } = useAppSelector(selectCollectionEcommerceSelector)
-    console.log(products);
+    const [isHovering, setIsHovered] = useState(false);
 
     return (
         <Grid>
             {products && products.length > 0 && products.map((product) => (
-                <Grid.Col span={3} key={product.id}>
-                    <Card shadow="sm" p="lg" radius="md" withBorder >
+                <Grid.Col md={3} sm={6} xs={12} key={product.id}>
+                    <Card shadow="sm" p="lg" radius="md" withBorder>
                         <Card.Section>
-                            <Center>
-                                {product.image && (
-                                    <Image
-                                        src={product.image ? product.image.url : ""}
-                                        width={160}
-                                        height={160}
-                                        alt={product.image.filename}
-                                    />)}
-                            </Center>
+                            <div
+                                className='relative group cursor-pointer'
+                                onMouseEnter={() => setIsHovered(true)}
+                                onMouseLeave={() => setIsHovered(false)}
+                            >
+                                <Center>
+                                    {product.image && (
+                                        <div className='relative'>
+                                            <Image
+                                                src={product.image ? product.image.url : ""}
+                                                width={160}
+                                                height={160}
+                                                alt={product.image.filename}
+                                            />
+                                        </div>
+                                    )}
+                                </Center>
+                                <div className="opacity-0 group-hover:opacity-100 absolute top-0 left-1/2 -translate-x-1/2 w-full h-full flex items-center justify-center">
+                                    <Transition
+                                        mounted={isHovering}
+                                        transition="slide-down"
+                                        duration={400}
+                                        timingFunction="ease"
+                                    >
+                                        {(styles) => <div style={styles} className="bg-white p-3">
+                                            <IconHeart />
+                                        </div>}
+                                    </Transition>
+                                </div>
+                            </div>
                         </Card.Section>
-                        <Text weight={500}>{product.name}</Text>
-                        <Text size="sm" color="dimmed">{product.price.formatted_with_code}</Text>
-                        <Button variant="light" color="blue" fullWidth mt="md" radius="md">
+
+                        <div className='h-12 mt-6'>
+                            <h3 className='font-bold text-xs leading-5 m-0 break-words'>{product.name}</h3>
+                        </div>
+                        <Group position="apart" mt="md" mb="xs">
+                            <p className='text-[#FF424E] font-medium'>{product.price.formatted_with_code}</p>
+                            <Badge color="pink" variant="light">
+                                Freeship
+                            </Badge>
+                        </Group>
+                        <Button variant="light" color="blue" fullWidth mt="md" radius="md" className='hover: bg-sky-100'>
                             Add to Cart
                         </Button>
                     </Card>

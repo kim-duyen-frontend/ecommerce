@@ -4,6 +4,7 @@ import ListProduct from '@/components/ListProduct/ListProduct';
 import { getListProduct } from '@/features';
 import { NextPage } from 'next';
 import Head from 'next/head'
+import { Container } from '@mantine/core';
 
 const Home: NextPage = () => {
   return (
@@ -14,9 +15,9 @@ const Home: NextPage = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <>
+      <Container fluid className='bg-[#efefef]'>
         <ListProduct />
-      </>
+      </Container>
     </>
   )
 }
