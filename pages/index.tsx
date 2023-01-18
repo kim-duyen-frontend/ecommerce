@@ -1,10 +1,13 @@
-
 import { wrapper } from '@/app/store';
 import ListProduct from '@/components/ListProduct/ListProduct';
 import { getListProduct } from '@/features';
 import { NextPage } from 'next';
 import Head from 'next/head'
-import { Container } from '@mantine/core';
+import { Container, Flex, Group, Tabs, Space } from '@mantine/core';
+import IconListCart from '@/components/IconCart/IconListCart';
+import IconListHeart from '@/components/IconHeart/IconListHeart';
+import SearchProduct from '@/components/SearchProduct/SearchProduct';
+import Image from 'next/image';
 
 const Home: NextPage = () => {
   return (
@@ -15,8 +18,45 @@ const Home: NextPage = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Container fluid className='bg-[#efefef]'>
-        <ListProduct />
+      <Container fluid>
+        <Flex
+          mih={70}
+          gap="md"
+          justify="space-between"
+          align="center"
+          direction="row"
+          wrap="wrap"
+          className='py-3'
+        >
+          <Image src={`/next.svg`} width={100} height={100} alt="logo" />
+          <SearchProduct />
+          <Group position="right">
+            <IconListCart />
+            <IconListHeart />
+          </Group>
+        </Flex>
+        <Space h="md" />
+        <Tabs
+          keepMounted={false} defaultValue="all"
+          onTabChange={(value) => console.log(value)}
+        >
+          <Tabs.List>
+            <Tabs.Tab value="all">Phổ biến</Tabs.Tab>
+            <Tabs.Tab value="price asc">Giá Thấp Đến Cao</Tabs.Tab>
+            <Tabs.Tab value="price desc">Giá Cao Đến Thấp</Tabs.Tab>
+          </Tabs.List>
+          <Space h="md" />
+          <Tabs.Panel value="all">
+            <ListProduct />
+          </Tabs.Panel>
+          <Tabs.Panel value="price asc">
+            <ListProduct />
+          </Tabs.Panel>
+          <Tabs.Panel value="price desc">
+            <ListProduct />
+          </Tabs.Panel>
+        </Tabs>
+
       </Container>
     </>
   )
