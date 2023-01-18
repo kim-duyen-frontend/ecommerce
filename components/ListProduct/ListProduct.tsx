@@ -4,6 +4,7 @@ import { selectCollectionEcommerceSelector } from '@/features';
 import { Card, Button, Grid, Badge, Center, Group, Transition } from '@mantine/core';
 import { IconHeart } from "@tabler/icons"
 import Image from 'next/image'
+import Link from 'next/link';
 
 const ListProduct = () => {
     const { products } = useAppSelector(selectCollectionEcommerceSelector)
@@ -48,7 +49,11 @@ const ListProduct = () => {
                         </Card.Section>
 
                         <div className='h-12 mt-6'>
-                            <h3 className='font-bold text-xs leading-5 m-0 break-words'>{product.name}</h3>
+                            <h3 className='font-bold text-xs leading-5 m-0 break-words'>
+                                <Link href={`/${product.permalink}`}>
+                                    {product.name}
+                                </Link>
+                            </h3>
                         </div>
                         <Group position="apart" mt="md" mb="xs">
                             <p className='text-[#FF424E] font-medium'>{product.price.formatted_with_code}</p>
