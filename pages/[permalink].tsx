@@ -50,7 +50,7 @@ const DetailProduct = ({ product }: { product: Product }) => {
                         className="p-2"
                     >
                         {product.assets.map((item) => (
-                            <div className='sm:w-[49%] md:w-[48%]' key={item.id}>
+                            <div className='sm: w-[49%] md: w-[48%]' key={item.id}>
                                 <Image
                                     className='object-cover w-full h-full'
                                     src={item.url}
