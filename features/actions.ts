@@ -9,3 +9,4 @@ export const getListProduct = createAsyncThunk(
   }
 );
 export const getListSortProduct = createAction<string>("shoppingcart/sortlist");
+export const getListSearchProduct = createAction<string>("shoppingcart/searchlist");

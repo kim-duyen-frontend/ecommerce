@@ -4,4 +4,5 @@ export type TProductsState = {
     pending: boolean
     products: Product[]
     type_sort: string | null
+    text_search: string
 }

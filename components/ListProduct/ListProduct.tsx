@@ -7,14 +7,13 @@ import Image from 'next/image'
 import Link from 'next/link';
 
 const ListProduct = () => {
-    const { products, type_sort } = useAppSelector(selectCollectionEcommerceSelector)
+    const { products, type_sort, text_search } = useAppSelector(selectCollectionEcommerceSelector)
     const [isHovering, setIsHovered] = useState(false);
 
     return (
         <Grid>
             {products &&
                 products.length > 0 &&
-
                 products
                     .slice()
                     .sort((a, b) => {
@@ -27,6 +26,8 @@ const ListProduct = () => {
                                 return 0
                         }
                     })
+                    .slice()
+                    .filter((list) => list.name.toLowerCase().includes(text_search.toLowerCase()))
                     .map((product) => (
                         <Grid.Col md={3} sm={6} xs={12} key={product.id}>
                             <Card shadow="sm" p="lg" radius="md" withBorder>

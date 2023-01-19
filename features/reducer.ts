@@ -1,5 +1,9 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { getListProduct, getListSortProduct } from "./actions";
+import {
+  getListProduct,
+  getListSearchProduct,
+  getListSortProduct,
+} from "./actions";
 import { TProductsState } from "./types";
 
 const initialState: TProductsState = {
@@ -135,6 +139,7 @@ const initialState: TProductsState = {
     },
   ],
   type_sort: "",
+  text_search: "",
 };
 export const ecommerceReducer = createReducer(initialState, (builder) => {
   builder
@@ -148,5 +153,9 @@ export const ecommerceReducer = createReducer(initialState, (builder) => {
     .addCase(getListSortProduct, (state, { payload }) => {
       state.pending = false;
       state.type_sort = payload;
+    })
+    .addCase(getListSearchProduct, (state, { payload }) => {
+      state.pending = false;
+      state.text_search = payload;
     });
 });
