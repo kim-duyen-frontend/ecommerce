@@ -1,5 +1,5 @@
 import commerce from "@/utils/api";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getListProduct = createAsyncThunk(
   "shoppingcart/list",
@@ -8,3 +8,4 @@ export const getListProduct = createAsyncThunk(
     return response;
   }
 );
+export const getListSortProduct = createAction<string>("shoppingcart/sortlist");

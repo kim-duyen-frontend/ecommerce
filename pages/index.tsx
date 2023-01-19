@@ -1,6 +1,6 @@
 import { wrapper } from '@/app/store';
 import ListProduct from '@/components/ListProduct/ListProduct';
-import { getListProduct } from '@/features';
+import { getListProduct, getListSortProduct } from '@/features';
 import { NextPage } from 'next';
 import Head from 'next/head'
 import { Container, Flex, Group, Tabs, Space } from '@mantine/core';
@@ -8,8 +8,10 @@ import IconListCart from '@/components/IconCart/IconListCart';
 import IconListHeart from '@/components/IconHeart/IconListHeart';
 import SearchProduct from '@/components/SearchProduct/SearchProduct';
 import Image from 'next/image';
+import { useAppDispatch } from '@/app/hooks';
 
 const Home: NextPage = () => {
+  const dispatch = useAppDispatch()
   return (
     <>
       <Head>
@@ -38,7 +40,7 @@ const Home: NextPage = () => {
         <Space h="md" />
         <Tabs
           keepMounted={false} defaultValue="all"
-          onTabChange={(value) => console.log(value)}
+          onTabChange={(value: string) => dispatch(getListSortProduct(value))}
         >
           <Tabs.List>
             <Tabs.Tab value="all">Phổ biến</Tabs.Tab>

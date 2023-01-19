@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { getListProduct } from "./actions";
+import { getListProduct, getListSortProduct } from "./actions";
 import { TProductsState } from "./types";
 
 const initialState: TProductsState = {
@@ -134,6 +134,7 @@ const initialState: TProductsState = {
       related_products: [],
     },
   ],
+  type_sort: "",
 };
 export const ecommerceReducer = createReducer(initialState, (builder) => {
   builder
@@ -143,5 +144,9 @@ export const ecommerceReducer = createReducer(initialState, (builder) => {
     .addCase(getListProduct.fulfilled, (state, { payload }) => {
       state.pending = false;
       state.products = payload.data;
+    })
+    .addCase(getListSortProduct, (state, { payload }) => {
+      state.pending = false;
+      state.type_sort = payload;
     });
 });
