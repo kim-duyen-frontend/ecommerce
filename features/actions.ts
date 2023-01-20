@@ -1,5 +1,6 @@
 import commerce from "@/utils/api";
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
+import { TItemPages } from "./types";
 
 export const getListProduct = createAsyncThunk(
   "shoppingcart/list",
@@ -9,4 +10,10 @@ export const getListProduct = createAsyncThunk(
   }
 );
 export const getListSortProduct = createAction<string>("shoppingcart/sortlist");
-export const getListSearchProduct = createAction<string>("shoppingcart/searchlist");
+export const getListSearchProduct = createAction<string>(
+  "shoppingcart/searchlist"
+);
+export const setPagePagination = createAction<number>(
+  "shoppingcart/activepage"
+);
+export const setItemPages = createAction<TItemPages>("shoppingcart/itempages");

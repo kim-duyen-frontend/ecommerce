@@ -1,8 +1,11 @@
+import { LIMIT_PAGE } from "@/utils/constVariable";
 import { createReducer } from "@reduxjs/toolkit";
 import {
   getListProduct,
   getListSearchProduct,
   getListSortProduct,
+  setItemPages,
+  setPagePagination,
 } from "./actions";
 import { TProductsState } from "./types";
 
@@ -140,6 +143,12 @@ const initialState: TProductsState = {
   ],
   type_sort: "",
   text_search: "",
+  newFilterSearchList: [],
+  active_page: 1,
+  item_pages: {
+    minItem: 0,
+    maxItem: LIMIT_PAGE,
+  },
 };
 export const ecommerceReducer = createReducer(initialState, (builder) => {
   builder
@@ -155,7 +164,22 @@ export const ecommerceReducer = createReducer(initialState, (builder) => {
       state.type_sort = payload;
     })
     .addCase(getListSearchProduct, (state, { payload }) => {
-      state.pending = false;
+      const temp = [...state.products];
       state.text_search = payload;
+      if (state.text_search) {
+        state.newFilterSearchList = temp.filter((item) =>
+          item.name
+            .toLocaleLowerCase()
+            .includes(state.text_search.toLocaleLowerCase())
+        );
+      } else {
+        state.newFilterSearchList = [];
+      }
+    })
+    .addCase(setPagePagination, (state, { payload }) => {
+      state.active_page = payload;
+    })
+    .addCase(setItemPages, (state, { payload }) => {
+      state.item_pages = payload;
     });
 });

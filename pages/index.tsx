@@ -1,6 +1,6 @@
 import { wrapper } from '@/app/store';
 import ListProduct from '@/components/ListProduct/ListProduct';
-import { getListProduct, getListSortProduct } from '@/features';
+import { getListProduct, getListSortProduct, selectCollectionEcommerceSelector } from '@/features';
 import { NextPage } from 'next';
 import Head from 'next/head'
 import { Container, Flex, Group, Tabs, Space } from '@mantine/core';
@@ -8,10 +8,14 @@ import IconListCart from '@/components/IconCart/IconListCart';
 import IconListHeart from '@/components/IconHeart/IconListHeart';
 import SearchProduct from '@/components/SearchProduct/SearchProduct';
 import Image from 'next/image';
-import { useAppDispatch } from '@/app/hooks';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import PaginationProduct from '@/components/PaginationProduct/PaginationProduct';
 
 const Home: NextPage = () => {
   const dispatch = useAppDispatch()
+  const { newFilterSearchList } = useAppSelector(selectCollectionEcommerceSelector);
+  console.log("xem: ", newFilterSearchList);
+
   return (
     <>
       <Head>
@@ -58,8 +62,11 @@ const Home: NextPage = () => {
             <ListProduct />
           </Tabs.Panel>
         </Tabs>
-
       </Container>
+      <Space h="md" />
+      {newFilterSearchList?.length > 0 && (
+        <PaginationProduct total={newFilterSearchList?.length} />
+      )}
     </>
   )
 }

@@ -1,6 +1,6 @@
 import Commerce from "@chec/commerce.js";
 
 const commerce = new Commerce(
-  "pk_4948359f1e75c44b0edf9a42b46c4d62cb5c32dedece2"
+  "pk_49483a28af8f3dfac86c81d51f963e3d1187b896ca1a8"
 );
 export default commerce;
