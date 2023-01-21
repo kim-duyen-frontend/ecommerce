@@ -5,6 +5,7 @@ import { createWrapper, HYDRATE } from "next-redux-wrapper";
 
 const combinedReducer = combineReducers({
   products: ecommerceReducer,
+  cart: ecommerceReducer
 });
 const reducer: typeof combinedReducer = (state, action) => {
   switch (action.type) {

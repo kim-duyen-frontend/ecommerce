@@ -9,6 +9,13 @@ export const getListProduct = createAsyncThunk(
     return response;
   }
 );
+export const getCartProduct = createAsyncThunk(
+  "shoppingcart/cart",
+  async () => {
+    const response = await commerce.cart.retrieve("cart_G6kVw7Q3vK52eD");
+    return response;
+  }
+);
 export const getListSortProduct = createAction<string>("shoppingcart/sortlist");
 export const getListSearchProduct = createAction<string>(
   "shoppingcart/searchlist"

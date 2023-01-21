@@ -15,11 +15,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 const ListProduct = () => {
-  const { products, type_sort, text_search, newFilterSearchList, item_pages } =
+  const { products, type_sort, text_search } =
     useAppSelector(selectCollectionEcommerceSelector);
   const [isHovering, setIsHovered] = useState(false);
-  console.log("check data: ", newFilterSearchList);
 
+   
   return (
     <Grid>
       {products?.length > 0 &&

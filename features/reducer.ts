@@ -1,6 +1,7 @@
 import { LIMIT_PAGE } from "@/utils/constVariable";
 import { createReducer } from "@reduxjs/toolkit";
 import {
+  getCartProduct,
   getListProduct,
   getListSearchProduct,
   getListSortProduct,
@@ -141,6 +142,27 @@ const initialState: TProductsState = {
       related_products: [],
     },
   ],
+  cart: {
+    id: "",
+    created: 0,
+    updated: 0,
+    expires: 0,
+    total_items: 0,
+    total_unique_items: 0,
+    subtotal: {
+      raw: 0,
+      formatted: "",
+      formatted_with_code: "",
+      formatted_with_symbol: "",
+    },
+    currency: {
+      symbol: "",
+      code: "",
+    },
+    discount_code: "",
+    hosted_checkout_url: "",
+    line_items: [],
+  },
   type_sort: "",
   text_search: "",
   newFilterSearchList: [],
@@ -158,6 +180,13 @@ export const ecommerceReducer = createReducer(initialState, (builder) => {
     .addCase(getListProduct.fulfilled, (state, { payload }) => {
       state.pending = false;
       state.products = payload.data;
+    })
+    .addCase(getCartProduct.pending, (state) => {
+      state.pending = true;
+    })
+    .addCase(getCartProduct.fulfilled, (state, { payload }) => {
+      state.pending = false;
+      state.cart = payload;
     })
     .addCase(getListSortProduct, (state, { payload }) => {
       state.pending = false;
