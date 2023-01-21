@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useAppSelector } from "app/hooks";
-import { selectCollectionEcommerceSelector } from "@/features";
+import { useAppDispatch, useAppSelector } from "app/hooks";
+import { addToCart, getCartProduct, selectCollectionEcommerceSelector, TAddCart } from "@/features";
 import {
   Card,
   Button,
@@ -13,13 +13,18 @@ import {
 import { IconHeart } from "@tabler/icons";
 import Image from "next/image";
 import Link from "next/link";
+import { Product } from "@chec/commerce.js/types/product";
 
 const ListProduct = () => {
   const { products, type_sort, text_search, item_pages } =
     useAppSelector(selectCollectionEcommerceSelector);
+  const dispatch = useAppDispatch()
   const [isHovering, setIsHovered] = useState(false);
 
-
+  const handleAddToCart = async (data: Product) => {
+    await dispatch(addToCart({ id: data.id, quantity: 1 }))
+    await dispatch(getCartProduct())
+  }
   return (
     <Grid>
       {products?.length > 0 &&
@@ -98,6 +103,7 @@ const ListProduct = () => {
                   mt="md"
                   radius="md"
                   className="hover: bg-sky-100"
+                  onClick={() => handleAddToCart(product)}
                 >
                   Add to Cart
                 </Button>
