@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useAppDispatch, useAppSelector } from "app/hooks";
+import { useAppSelector } from "app/hooks";
 import { selectCollectionEcommerceSelector } from "@/features";
 import {
   Card,
@@ -15,11 +15,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 const ListProduct = () => {
-  const { products, type_sort, text_search } =
+  const { products, type_sort, text_search, item_pages } =
     useAppSelector(selectCollectionEcommerceSelector);
   const [isHovering, setIsHovered] = useState(false);
 
-   
+
   return (
     <Grid>
       {products?.length > 0 &&
@@ -39,6 +39,7 @@ const ListProduct = () => {
           .filter((list) =>
             list.name.toLowerCase().includes(text_search.toLowerCase())
           )
+          .slice(item_pages.minItem, item_pages.maxItem)
           .map((product) => (
             <Grid.Col md={3} sm={6} xs={12} key={product.id}>
               <Card shadow="sm" p="lg" radius="md" withBorder>

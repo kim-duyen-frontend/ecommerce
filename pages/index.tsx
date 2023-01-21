@@ -11,10 +11,11 @@ import Image from 'next/image';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import PaginationProduct from '@/components/PaginationProduct/PaginationProduct';
 import React, { useEffect, useCallback } from "react"
+import { LIMIT_PAGE } from '@/utils/constVariable';
 
 const Home: NextPage = () => {
   const dispatch = useAppDispatch()
-  const { newFilterSearchList } = useAppSelector(selectCollectionEcommerceSelector);
+  const { newFilterSearchList, products } = useAppSelector(selectCollectionEcommerceSelector);
 
   const callAPI = useCallback(async () => {
     await dispatch(getCartProduct()).unwrap()
@@ -72,7 +73,10 @@ const Home: NextPage = () => {
         </Tabs>
       </Container>
       <Space h="md" />
-      {newFilterSearchList?.length > 0 && (
+      {products?.length >= LIMIT_PAGE && (
+        <PaginationProduct total={products?.length} />
+      )}
+      {newFilterSearchList?.length > 0 && !products && (
         <PaginationProduct total={newFilterSearchList?.length} />
       )}
     </>
