@@ -10,6 +10,7 @@ export type TProductsState = {
   newFilterSearchList: Product[];
   active_page: number;
   item_pages: TItemPages;
+  heartList: Product[];
 };
 export type TAddCart = {
   id: string;

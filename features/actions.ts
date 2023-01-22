@@ -1,4 +1,5 @@
 import commerce from "@/utils/api";
+import { Product } from "@chec/commerce.js/types/product";
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { TAddCart, TItemPages } from "./types";
 
@@ -34,3 +35,4 @@ export const setPagePagination = createAction<number>(
   "shoppingcart/activepage"
 );
 export const setItemPages = createAction<TItemPages>("shoppingcart/itempages");
+export const setHeartList = createAction<Product>("shoppingcart/heartlist");

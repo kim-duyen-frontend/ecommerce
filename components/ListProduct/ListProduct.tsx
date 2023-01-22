@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { addToCart, getCartProduct, selectCollectionEcommerceSelector, TAddCart } from "@/features";
+import { addToCart, getCartProduct, selectCollectionEcommerceSelector, setHeartList } from "@/features";
 import {
   Card,
   Button,
@@ -16,7 +16,7 @@ import Link from "next/link";
 import { Product } from "@chec/commerce.js/types/product";
 
 const ListProduct = () => {
-  const { products, type_sort, text_search, item_pages } =
+  const { products, type_sort, text_search, item_pages, heartList } =
     useAppSelector(selectCollectionEcommerceSelector);
   const dispatch = useAppDispatch()
   const [isHovering, setIsHovered] = useState(false);
@@ -25,6 +25,7 @@ const ListProduct = () => {
     await dispatch(addToCart({ id: data.id, quantity: 1 }))
     await dispatch(getCartProduct())
   }
+
   return (
     <Grid>
       {products?.length > 0 &&
@@ -74,7 +75,10 @@ const ListProduct = () => {
                         timingFunction="ease"
                       >
                         {(styles) => (
-                          <div style={styles} className="bg-white p-3">
+                          <div
+                            style={styles}
+                            className="bg-white p-3 cursor-pointer"
+                            onClick={() => dispatch(setHeartList(product))}>
                             <IconHeart />
                           </div>
                         )}

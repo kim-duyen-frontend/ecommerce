@@ -5,6 +5,7 @@ import {
   getListProduct,
   getListSearchProduct,
   getListSortProduct,
+  setHeartList,
   setItemPages,
   setPagePagination,
 } from "./actions";
@@ -171,6 +172,7 @@ const initialState: TProductsState = {
     minItem: 0,
     maxItem: LIMIT_PAGE,
   },
+  heartList: [],
 };
 export const ecommerceReducer = createReducer(initialState, (builder) => {
   builder
@@ -210,5 +212,14 @@ export const ecommerceReducer = createReducer(initialState, (builder) => {
     })
     .addCase(setItemPages, (state, { payload }) => {
       state.item_pages = payload;
+    })
+    .addCase(setHeartList, (state, { payload }) => {
+      const temp = [...state.heartList];
+      let isCheck = temp.some((item) => item.id === payload.id);
+      if (isCheck) {
+        state.heartList = [...state.heartList];
+      } else {
+        state.heartList = [...state.heartList, payload];
+      }
     });
 });
