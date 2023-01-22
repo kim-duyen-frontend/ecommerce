@@ -173,6 +173,7 @@ const initialState: TProductsState = {
     maxItem: LIMIT_PAGE,
   },
   heartList: [],
+  likes: [],
 };
 export const ecommerceReducer = createReducer(initialState, (builder) => {
   builder
@@ -222,6 +223,7 @@ export const ecommerceReducer = createReducer(initialState, (builder) => {
         state.heartList = [...state.heartList];
       } else {
         state.heartList = [...state.heartList, payload];
+        state.likes = [...state.likes, payload.id];
       }
     });
 });

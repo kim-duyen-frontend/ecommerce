@@ -16,7 +16,7 @@ import Link from "next/link";
 import { Product } from "@chec/commerce.js/types/product";
 
 const ListProduct = () => {
-  const { products, type_sort, text_search, item_pages, heartList } =
+  const { products, type_sort, text_search, likes } =
     useAppSelector(selectCollectionEcommerceSelector);
   const dispatch = useAppDispatch()
   const [isHovering, setIsHovered] = useState(false);
@@ -78,7 +78,7 @@ const ListProduct = () => {
                             style={styles}
                             className="bg-white p-3 cursor-pointer"
                             onClick={() => dispatch(setHeartList(product))}>
-                            <IconHeart />
+                            <IconHeart className={`${likes.includes(product.id) ? "fill-red-500 text-red-500" : ""}`} />
                           </div>
                         )}
                       </Transition>

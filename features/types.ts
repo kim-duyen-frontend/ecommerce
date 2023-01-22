@@ -11,6 +11,7 @@ export type TProductsState = {
   active_page: number;
   item_pages: TItemPages;
   heartList: Product[];
+  likes: string[];
 };
 export type TAddCart = {
   id: string;
