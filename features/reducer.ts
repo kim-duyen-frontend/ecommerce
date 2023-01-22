@@ -198,11 +198,13 @@ export const ecommerceReducer = createReducer(initialState, (builder) => {
       const temp = [...state.products];
       state.text_search = payload;
       if (state.text_search) {
-        state.newFilterSearchList = temp.filter((item) =>
-          item.name
-            .toLocaleLowerCase()
-            .includes(state.text_search.toLocaleLowerCase())
-        );
+        state.newFilterSearchList = temp
+          .slice(state.item_pages.minItem, state.item_pages.maxItem)
+          .filter((item) =>
+            item.name
+              .toLocaleLowerCase()
+              .includes(state.text_search.toLocaleLowerCase())
+          );
       } else {
         state.newFilterSearchList = [];
       }
