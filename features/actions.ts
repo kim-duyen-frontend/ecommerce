@@ -34,6 +34,13 @@ export const removeProductFromCart = createAsyncThunk(
     return response;
   }
 );
+export const deleteCart = createAsyncThunk(
+  "shoppingcart/deletecart",
+  async () => {
+    const response = await commerce.cart.empty();
+    return response;
+  }
+);
 export const getListSortProduct = createAction<string>("shoppingcart/sortlist");
 export const getListSearchProduct = createAction<string>(
   "shoppingcart/searchlist"
