@@ -14,7 +14,7 @@ import React, { useEffect, useCallback } from "react"
 
 const Home: NextPage = () => {
   const dispatch = useAppDispatch()
-  const { newFilterSearchList, products } = useAppSelector(selectCollectionEcommerceSelector);
+  const { newFilterSearchList } = useAppSelector(selectCollectionEcommerceSelector);
 
   const callAPI = useCallback(async () => {
     await dispatch(getCartProduct()).unwrap()

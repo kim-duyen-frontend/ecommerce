@@ -7,7 +7,7 @@ import Image from 'next/image';
 const TableCart = () => {
     const { cart } = useAppSelector(selectCollectionEcommerceSelector);
     return (
-        <div>
+        <div className = 'overflow-x-auto'>
             <Table verticalSpacing="sm" highlightOnHover fontSize="md">
                 <thead>
                     <tr>
