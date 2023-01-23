@@ -2,6 +2,8 @@ import React from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import TableCart from '@/components/TableCart/TableCart';
+import ButtonDeleteCart from '@/components/ButtonDeleteCart/ButtonDeleteCart';
+import { Center, Title } from '@mantine/core';
 
 const CartProductPage: NextPage = () => {
     return (
@@ -12,6 +14,12 @@ const CartProductPage: NextPage = () => {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
+            <Center>
+                <Title order={2}>Giỏ hàng</Title>
+            </Center>
+            <div className='flex justify-end items-center h-20'>
+                <ButtonDeleteCart />
+            </div>
             <TableCart />
         </>
     );

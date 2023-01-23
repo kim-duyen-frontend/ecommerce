@@ -1,13 +1,14 @@
 import React from 'react';
-import { Table, Group, Text } from '@mantine/core';
+import { Table, Group, Text, ActionIcon } from '@mantine/core';
 import { useAppSelector } from '@/app/hooks';
 import { selectCollectionEcommerceSelector } from '@/features';
 import Image from 'next/image';
+import { IconX } from "@tabler/icons"
 
 const TableCart = () => {
     const { cart } = useAppSelector(selectCollectionEcommerceSelector);
     return (
-        <div className = 'overflow-x-auto'>
+        <div className='overflow-x-auto'>
             <Table verticalSpacing="sm" highlightOnHover fontSize="md">
                 <thead>
                     <tr>
@@ -15,6 +16,7 @@ const TableCart = () => {
                         <th>Tên sản phẩm</th>
                         <th>Số lượng</th>
                         <th>Giá</th>
+                        <th>Xoá</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,8 +28,21 @@ const TableCart = () => {
                                 )}
                             </td>
                             <td>{item.name}</td>
-                            <td>{item.quantity}</td>
+                            <td>
+                                <Group spacing={5}>
+                                    <ActionIcon size={42} variant="default">
+                                        –
+                                    </ActionIcon>
+                                    {item.quantity}
+                                    <ActionIcon size={42} variant="default">
+                                        +
+                                    </ActionIcon>
+                                </Group>
+                            </td>
                             <td>{item.line_total.formatted}</td>
+                            <td>
+                                <IconX className='cursor-pointer' />
+                            </td>
                         </tr>
                     ))}
                 </tbody>
