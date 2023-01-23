@@ -1,12 +1,18 @@
 import React from 'react';
 import { Table, Group, Text, ActionIcon } from '@mantine/core';
-import { useAppSelector } from '@/app/hooks';
-import { selectCollectionEcommerceSelector } from '@/features';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { getCartProduct, removeProductFromCart, selectCollectionEcommerceSelector } from '@/features';
 import Image from 'next/image';
 import { IconX } from "@tabler/icons"
 
 const TableCart = () => {
     const { cart } = useAppSelector(selectCollectionEcommerceSelector);
+    const dispatch = useAppDispatch()
+    
+    const handleRemoveProduct = async (id: string) => {
+        await dispatch(removeProductFromCart(id))
+        await dispatch(getCartProduct())
+    }
     return (
         <div className='overflow-x-auto'>
             <Table verticalSpacing="sm" highlightOnHover fontSize="md">
@@ -41,7 +47,7 @@ const TableCart = () => {
                             </td>
                             <td>{item.line_total.formatted}</td>
                             <td>
-                                <IconX className='cursor-pointer' />
+                                <IconX className='cursor-pointer' onClick={() => handleRemoveProduct(item.id)} />
                             </td>
                         </tr>
                     ))}
