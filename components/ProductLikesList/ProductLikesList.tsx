@@ -7,8 +7,8 @@ import {
     Group,
     Transition,
 } from "@mantine/core";
-import { useAppSelector } from '@/app/hooks';
-import { selectCollectionEcommerceSelector } from '@/features';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
+import { selectCollectionEcommerceSelector, updateHeartList } from '@/features';
 import Link from "next/link";
 import Image from "next/image";
 import { IconHeartOff } from "@tabler/icons";
@@ -16,6 +16,8 @@ import { IconHeartOff } from "@tabler/icons";
 const ProductLikesList = () => {
     const { heartList } = useAppSelector(selectCollectionEcommerceSelector)
     const [isHovering, setIsHovered] = useState(false);
+    const dispatch = useAppDispatch()
+
     return (
         <Grid>
             {heartList.map((product) => (
@@ -49,7 +51,9 @@ const ProductLikesList = () => {
                                         {(styles) => (
                                             <div
                                                 style={styles}
-                                                className="bg-white p-3 cursor-pointer">
+                                                className="bg-white p-3 cursor-pointer"
+                                                onClick={() => dispatch(updateHeartList(product))}
+                                            >
                                                 <IconHeartOff />
                                             </div>
                                         )}

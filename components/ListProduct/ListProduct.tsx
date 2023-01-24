@@ -77,7 +77,8 @@ const ListProduct = () => {
                           <div
                             style={styles}
                             className="bg-white p-3 cursor-pointer"
-                            onClick={() => dispatch(setHeartList(product))}>
+                            onClick={() => dispatch(setHeartList(product))}
+                          >
                             <IconHeart className={`${likes.includes(product.id) ? "fill-red-500 text-red-500" : ""}`} />
                           </div>
                         )}

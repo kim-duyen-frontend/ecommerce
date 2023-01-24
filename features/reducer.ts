@@ -8,6 +8,7 @@ import {
   setHeartList,
   setItemPages,
   setPagePagination,
+  updateHeartList,
 } from "./actions";
 import { TProductsState } from "./types";
 
@@ -225,5 +226,11 @@ export const ecommerceReducer = createReducer(initialState, (builder) => {
         state.heartList = [...state.heartList, payload];
         state.likes = [...state.likes, payload.id];
       }
+    })
+    .addCase(updateHeartList, (state, { payload }) => {
+      const tempHeartList = [...state.heartList];
+      const tempLikes = [...state.likes];
+      state.likes = tempLikes.filter((item) => item !== payload.id);
+      state.heartList = tempHeartList.filter((item) => item.id !== payload.id);
     });
 });

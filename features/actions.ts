@@ -50,3 +50,6 @@ export const setPagePagination = createAction<number>(
 );
 export const setItemPages = createAction<TItemPages>("shoppingcart/itempages");
 export const setHeartList = createAction<Product>("shoppingcart/heartlist");
+export const updateHeartList = createAction<Product>(
+  "shoppingcart/removeheart"
+);
