@@ -41,6 +41,24 @@ export const deleteCart = createAsyncThunk(
     return response;
   }
 );
+export const increamentQuantity = createAsyncThunk(
+  "shoppingcart/increamentqty",
+  async (data: TAddCart) => {
+    const response = await commerce.cart.update(data.id, {
+      quantity: data.quantity + 1,
+    });
+    return response;
+  }
+);
+export const decreamentQuantity = createAsyncThunk(
+  "shoppingcart/decreamentqty",
+  async (data: TAddCart) => {
+    const response = await commerce.cart.update(data.id, {
+      quantity: data.quantity - 1,
+    });
+    return response;
+  }
+);
 export const getListSortProduct = createAction<string>("shoppingcart/sortlist");
 export const getListSearchProduct = createAction<string>(
   "shoppingcart/searchlist"

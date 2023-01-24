@@ -1,16 +1,24 @@
 import React from 'react';
 import { Table, Group, Text, ActionIcon } from '@mantine/core';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
-import { getCartProduct, removeProductFromCart, selectCollectionEcommerceSelector } from '@/features';
+import { decreamentQuantity, getCartProduct, increamentQuantity, removeProductFromCart, selectCollectionEcommerceSelector, TAddCart } from '@/features';
 import Image from 'next/image';
 import { IconX } from "@tabler/icons"
 
 const TableCart = () => {
     const { cart } = useAppSelector(selectCollectionEcommerceSelector);
     const dispatch = useAppDispatch()
-    
+
     const handleRemoveProduct = async (id: string) => {
         await dispatch(removeProductFromCart(id))
+        await dispatch(getCartProduct())
+    }
+    const increamentQty = async (productCart: TAddCart) => {
+        await dispatch(increamentQuantity({ id: productCart.id, quantity: productCart.quantity }))
+        await dispatch(getCartProduct())
+    }
+    const decreamentQty = async (productCart: TAddCart) => {
+        await dispatch(decreamentQuantity({ id: productCart.id, quantity: productCart.quantity }))
         await dispatch(getCartProduct())
     }
     return (
@@ -36,11 +44,11 @@ const TableCart = () => {
                             <td>{item.name}</td>
                             <td>
                                 <Group spacing={5}>
-                                    <ActionIcon size={42} variant="default">
+                                    <ActionIcon size={42} variant="default" onClick={() => decreamentQty(item)}>
                                         –
                                     </ActionIcon>
                                     {item.quantity}
-                                    <ActionIcon size={42} variant="default">
+                                    <ActionIcon size={42} variant="default" onClick={() => increamentQty(item)}>
                                         +
                                     </ActionIcon>
                                 </Group>
@@ -56,7 +64,7 @@ const TableCart = () => {
             <Group position="right">
                 <Text tt="capitalize" size="lg">tổng tiền: {cart.subtotal.formatted}</Text>
             </Group>
-        </div>
+        </div >
     );
 };
 
