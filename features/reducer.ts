@@ -8,6 +8,7 @@ import {
   setHeartList,
   setItemPages,
   setPagePagination,
+  setStarsProduct,
   updateHeartList,
 } from "./actions";
 import { TProductsState } from "./types";
@@ -175,6 +176,7 @@ const initialState: TProductsState = {
   },
   heartList: [],
   likes: [],
+  starList: [],
 };
 export const ecommerceReducer = createReducer(initialState, (builder) => {
   builder
@@ -232,5 +234,15 @@ export const ecommerceReducer = createReducer(initialState, (builder) => {
       const tempLikes = [...state.likes];
       state.likes = tempLikes.filter((item) => item !== payload.id);
       state.heartList = tempHeartList.filter((item) => item.id !== payload.id);
+    })
+    .addCase(setStarsProduct, (state, { payload }) => {
+      const temp = [...state.starList];
+      for (let i = 0; i < temp.length; i++) {
+        const element = temp[i];
+        if (element.id === payload.id) {
+          state.starList.shift();
+        }
+      }
+      state.starList = [...state.starList, payload];
     });
 });

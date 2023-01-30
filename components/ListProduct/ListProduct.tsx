@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { addToCart, getCartProduct, selectCollectionEcommerceSelector, setHeartList } from "@/features";
+import { addToCart, getCartProduct, selectCollectionEcommerceSelector, setHeartList, setStarsProduct } from "@/features";
 import {
   Card,
   Button,
@@ -9,6 +9,7 @@ import {
   Center,
   Group,
   Transition,
+  Rating,
 } from "@mantine/core";
 import { IconHeart } from "@tabler/icons";
 import Image from "next/image";
@@ -16,7 +17,7 @@ import Link from "next/link";
 import { Product } from "@chec/commerce.js/types/product";
 
 const ListProduct = () => {
-  const { products, type_sort, text_search, likes } =
+  const { products, type_sort, text_search, likes, starList } =
     useAppSelector(selectCollectionEcommerceSelector);
   const dispatch = useAppDispatch()
   const [isHovering, setIsHovered] = useState(false);
@@ -25,7 +26,6 @@ const ListProduct = () => {
     await dispatch(addToCart({ id: data.id, quantity: 1 }))
     await dispatch(getCartProduct())
   }
-
   return (
     <Grid>
       {products?.length > 0 &&
@@ -92,6 +92,9 @@ const ListProduct = () => {
                     <Link href={`/${product.permalink}`}>{product.name}</Link>
                   </h3>
                 </div>
+                <Group>
+                  {starList.some((item) => item.id == product.id) ? <Rating defaultValue={starList[0]?.stars} /> : ""}
+                </Group>
                 <Group position="apart" mt="md" mb="xs">
                   <p className="text-[#FF424E] font-medium">
                     {product.price.formatted_with_code}

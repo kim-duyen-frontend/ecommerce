@@ -1,6 +1,10 @@
 import { Cart } from "@chec/commerce.js/types/cart";
 import { Product } from "@chec/commerce.js/types/product";
 
+export type TReviewProduct = {
+  id: string;
+  stars: number;
+};
 export type TProductsState = {
   pending: boolean;
   products: Product[];
@@ -12,6 +16,7 @@ export type TProductsState = {
   item_pages: TItemPages;
   heartList: Product[];
   likes: string[];
+  starList: TReviewProduct[];
 };
 export type TAddCart = {
   id: string;

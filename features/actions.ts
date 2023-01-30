@@ -1,7 +1,7 @@
 import commerce from "@/utils/api";
 import { Product } from "@chec/commerce.js/types/product";
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
-import { TAddCart, TItemPages } from "./types";
+import { TAddCart, TItemPages, TReviewProduct } from "./types";
 
 export const getListProduct = createAsyncThunk(
   "shoppingcart/list",
@@ -71,3 +71,4 @@ export const setHeartList = createAction<Product>("shoppingcart/heartlist");
 export const updateHeartList = createAction<Product>(
   "shoppingcart/removeheart"
 );
+export const setStarsProduct = createAction<TReviewProduct>("shoppingcart/stars");
