@@ -5,9 +5,8 @@ import { ParsedUrlQuery } from 'querystring';
 import React from 'react';
 import { Grid, Container, Flex, Title, Group, Rating } from '@mantine/core';
 import Image from 'next/image';
-import { selectCollectionEcommerceSelector, setStarsProduct } from '@/features';
-import { useAppDispatch, useAppSelector } from '@/app/hooks';
-// import RatingStar from '@/components/RatingStar/RatingStar';
+import { setStarsProduct } from '@/features';
+import { useAppDispatch } from '@/app/hooks';
 
 interface IParams extends ParsedUrlQuery {
     permalink: string
@@ -45,7 +44,7 @@ const DetailProduct = ({ product }: { product: Product }) => {
     const handleChangeStar = (product: Product, value: number) => {
         dispatch(setStarsProduct({ id: product.id, stars: value }))
     }
-    
+
     return (
         <Container fluid >
             <Grid grow>

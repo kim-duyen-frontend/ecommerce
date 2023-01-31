@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { addToCart, getCartProduct, selectCollectionEcommerceSelector, setHeartList, setStarsProduct } from "@/features";
+import { addToCart, getCartProduct, selectCollectionEcommerceSelector, setHeartList } from "@/features";
 import {
   Card,
   Button,
@@ -26,6 +26,7 @@ const ListProduct = () => {
     await dispatch(addToCart({ id: data.id, quantity: 1 }))
     await dispatch(getCartProduct())
   }
+
   return (
     <Grid>
       {products?.length > 0 &&

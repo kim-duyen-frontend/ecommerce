@@ -223,7 +223,8 @@ export const ecommerceReducer = createReducer(initialState, (builder) => {
       const temp = [...state.heartList];
       let isCheck = temp.some((item) => item.id === payload.id);
       if (isCheck) {
-        state.heartList = [...state.heartList];
+        state.heartList = temp.filter((item) => item.id !== payload.id);
+        state.likes = [...state.likes].filter((item) => item !== payload.id);
       } else {
         state.heartList = [...state.heartList, payload];
         state.likes = [...state.likes, payload.id];
